@@ -13,3 +13,6 @@
       server: '*'
     sourceRepos:
     - "https://github.com/TechTalk-With-Nathan/platform-gitops"
+    - "https://charts.jetstack.io"
+    - "https://prometheus-community.github.io/helm-charts"
+    - "https://grafana.github.io/helm-charts"
