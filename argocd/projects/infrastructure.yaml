@@ -1,0 +1,15 @@
+  apiVersion: argoproj.io/v1alpha1
+  kind: AppProject
+  metadata:
+    name: infrastructure
+    namespace: argocd
+  spec:
+    description: "Infrastructure add-ons managed by Argo CD ApplicationSet"
+    clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+    destinations:
+    - namespace: '*'
+      server: '*'
+    sourceRepos:
+    - "https://github.com/TechTalk-With-Nathan/platform-gitops"
