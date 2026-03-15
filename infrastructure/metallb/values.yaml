@@ -1,0 +1,43 @@
+controller:
+  enabled: true
+  logLevel: info
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule
+  nodeSelector: {}
+
+speaker:
+  enabled: true
+  logLevel: info
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule
+  nodeSelector: {}
+
+crds:
+  enabled: true
+  validationFailurePolicy: Fail
+
+prometheus:
+  scrapeAnnotations: false
+  metricsPort: 7472
+  rbacPrometheus: true
+
+  podMonitor:
+    enabled: false
+
+  serviceMonitor:
+    enabled: false
+
+  prometheusRule:
+    enabled: false

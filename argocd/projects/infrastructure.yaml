@@ -19,3 +19,4 @@
     - "https://bitnami-labs.github.io/sealed-secrets"
     - "https://kubernetes-sigs.github.io/external-dns"
     - "https://helm.cilium.io"
+    - "https://metallb.github.io/metallb"
