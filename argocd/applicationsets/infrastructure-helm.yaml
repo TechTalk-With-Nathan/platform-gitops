@@ -35,6 +35,11 @@ spec:
             gitPath: infrastructure/external-dns
             wave: 1
 
+          - name: cilium
+            namespace: cilium
+            gitPath: infrastructure/cilium
+            wave: 1
+
   template:
     metadata:
       name: "{{.name}}"

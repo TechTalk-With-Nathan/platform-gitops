@@ -18,3 +18,4 @@
     - "https://grafana.github.io/helm-charts"
     - "https://bitnami-labs.github.io/sealed-secrets"
     - "https://kubernetes-sigs.github.io/external-dns"
+    - "https://helm.cilium.io"

@@ -4,7 +4,7 @@ provider:
 extraArgs:
   - --txt-owner-id=k8s
   - --txt-prefix=external-dns-
-  - --rfc2136-host=bind9
+  - --rfc2136-host=bind9.external-dns.svc.cluster.local
   - --rfc2136-port=53
   - --rfc2136-zone=example.com
   - --rfc2136-tsig-secret-alg=hmac-sha256
@@ -12,6 +12,7 @@ extraArgs:
   - --domain-filter=example.com
   - --source=service
   - --source=ingress
+  - --log-level=info
 
 env:
   - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
@@ -24,14 +25,7 @@ env:
       secretKeyRef:
         name: rfc2136-keys
         key: rfc2136-tsig-keyname
-sources:
-  - service
-  - ingress
-  - gateway-httproute
-  - gateway-tcproute
-  - gateway-tlsroute
-  - gateway-udproute
-policy: sync
-logLevel: info
-interval: 30s
+
 replicaCount: 1
+interval: 30s
+policy: sync
