@@ -4,7 +4,7 @@ kind: Kustomization
 helmCharts:
 - name: metallb
   repo: https://metallb.github.io/metallb
-  version: 1.20.0
+  version: 0.15.3
   releaseName: metallb
   valuesFile: values.yaml
   namespace: metallb
