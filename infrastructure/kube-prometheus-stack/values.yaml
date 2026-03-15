@@ -63,3 +63,7 @@ prometheus:
       secretName: prometheus-tls
   prometheusSpec:
     routePrefix: /
+
+prometheusOperator:
+  crds:
+    enabled: false
