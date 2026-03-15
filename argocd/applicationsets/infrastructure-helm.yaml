@@ -46,7 +46,7 @@ spec:
             wave: 2
 
           - name: cilium
-            namespace: cilium
+            namespace: kube-system
             gitPath: infrastructure/cilium
             wave: 2
 

@@ -1,0 +1,73 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: platform-gitops
+
+servers: 1
+agents: 2
+
+image: rancher/k3s:v1.35.2-k3s1
+network: platform-gitops
+
+kubeAPI:
+  host: k8s.example.com
+  hostIP: "127.0.0.1"
+  hostPort: "6445"
+
+ports:
+  - port: 8085:80
+    nodeFilters:
+      - loadbalancer
+  - port: 8443:443
+    nodeFilters:
+      - loadbalancer
+
+hostAliases:
+  - ip: "127.0.0.1"
+    hostnames:
+      - k8s.example.com
+
+volumes:
+  - volume: /sys/fs/bpf:/sys/fs/bpf
+    nodeFilters:
+      - server:*
+      - agent:*
+
+  - volume: /lib/modules:/lib/modules
+    nodeFilters:
+      - server:*
+      - agent:*
+
+options:
+  runtime:
+    ulimits:
+      - name: memlock
+        soft: -1
+        hard: -1
+
+  k3s:
+    extraArgs:
+
+      - arg: "--disable=traefik"
+        nodeFilters:
+          - server:*
+
+      - arg: "--flannel-backend=none"
+        nodeFilters:
+          - server:*
+
+      - arg: "--disable-network-policy"
+        nodeFilters:
+          - server:*
+
+      - arg: "--disable=servicelb"
+        nodeFilters:
+          - server:*
+
+      - arg: "--cluster-cidr=10.42.0.0/16"
+        nodeFilters:
+          - server:*
+
+      - arg: "--service-cidr=10.43.0.0/16"
+        nodeFilters:
+          - server:*
