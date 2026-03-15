@@ -4,6 +4,10 @@ metadata:
   name: bind-config
   namespace: external-dns
 data:
+  named.conf: |
+    include "/etc/bind/named.conf.options";
+    include "/etc/bind/named.conf.local";
+
   named.conf.options: |
     options {
         directory "/var/cache/bind";
@@ -18,7 +22,7 @@ data:
 
     zone "example.com" {
         type master;
-        file "/zones/k8s.zone";
+        file "/var/cache/bind/k8s.zone";
         allow-transfer { key "externaldns-key"; };
         update-policy { grant externaldns-key zonesub ANY; };
     };

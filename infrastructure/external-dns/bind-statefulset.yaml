@@ -23,6 +23,20 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /var/cache/bind
+      - name: init-zone
+        image: busybox
+        command:
+          - sh
+          - -c
+          - |
+            if [ ! -f /var/cache/bind/k8s.zone ]; then
+              cp /zones/k8s.zone /var/cache/bind/k8s.zone
+            fi
+        volumeMounts:
+          - name: zones
+            mountPath: /zones
+          - name: data
+            mountPath: /var/cache/bind
       containers:
       - name: bind9
         image: internetsystemsconsortium/bind9:9.20
@@ -47,6 +61,9 @@ spec:
           subPath: named.conf.local
         - name: keys
           mountPath: /etc/bind/keys
+        - name: config
+          mountPath: /etc/bind/named.conf
+          subPath: named.conf
         - name: zones
           mountPath: /zones
         - name: data
