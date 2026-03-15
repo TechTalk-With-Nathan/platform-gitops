@@ -51,6 +51,19 @@ spec:
         securityContext:
           runAsUser: 101
           runAsGroup: 101
+      volumes:
+      - name: config
+        configMap:
+          name: bind-config
+      - name: zones
+        configMap:
+          name: bind-zone
+      - name: keys
+        secret:
+          secretName: bind-tsig-key
+          items:
+          - key: external-dns.key
+            path: external-dns.key
   volumeClaimTemplates:
   - metadata:
       name: data
@@ -60,16 +73,3 @@ spec:
       resources:
         requests:
           storage: 1Gi
-  volumes:
-  - name: config
-    configMap:
-      name: bind-config
-  - name: zones
-    configMap:
-      name: bind-zone
-  - name: keys
-    secret:
-      secretName: bind-tsig-key
-      items:
-      - key: external-dns.key
-        path: external-dns.key
