@@ -12,7 +12,6 @@ extraArgs:
   - --domain-filter=example.com
   - --source=service
   - --source=ingress
-  - --log-level=info
 
 env:
   - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
