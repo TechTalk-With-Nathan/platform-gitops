@@ -22,6 +22,6 @@ data:
     zone "example.com" {
         type master;
         file "/var/cache/bind/k8s.zone";
-        allow-transfer { key "externaldns-key"; };
-        update-policy { grant externaldns-key zonesub ANY; };
+        allow-transfer { key "externaldns"; };
+        update-policy { grant externaldns zonesub ANY; };
     };
