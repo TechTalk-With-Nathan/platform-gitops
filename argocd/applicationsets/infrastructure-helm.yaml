@@ -30,6 +30,10 @@ spec:
             gitPath: infrastructure/kube-prometheus-stack
             wave: 1
 
+          - name: external-dns
+            namespace: external-dns
+            gitPath: infrastructure/external-dns
+            wave: 1
 
   template:
     metadata:

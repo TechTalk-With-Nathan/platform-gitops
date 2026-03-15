@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bind9
+  namespace: external-dns
+spec:
+  serviceName: bind9
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bind9
+  template:
+    metadata:
+      labels:
+        app: bind9
+    spec:
+      securityContext:
+        fsGroup: 101
+      initContainers:
+      - name: init-chown
+        image: busybox
+        command: ['sh', '-c', 'chown -R 101:101 /var/cache/bind /zones /etc/bind/keys']
+        volumeMounts:
+        - name: data
+          mountPath: /var/cache/bind
+        - name: zones
+          mountPath: /zones
+        - name: keys
+          mountPath: /etc/bind/keys
+      containers:
+      - name: bind9
+        image: internetsystemsconsortium/bind9:9.20
+        ports:
+        - containerPort: 53
+          protocol: UDP
+        - containerPort: 53
+          protocol: TCP
+        volumeMounts:
+        - name: config
+          mountPath: /etc/bind/named.conf.options
+          subPath: named.conf.options
+        - name: config
+          mountPath: /etc/bind/named.conf.local
+          subPath: named.conf.local
+        - name: keys
+          mountPath: /etc/bind/keys
+        - name: zones
+          mountPath: /zones
+        - name: data
+          mountPath: /var/cache/bind
+        securityContext:
+          runAsUser: 101
+          runAsGroup: 101
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: standard
+      resources:
+        requests:
+          storage: 1Gi
+  volumes:
+  - name: config
+    configMap:
+      name: bind-config
+  - name: zones
+    configMap:
+      name: bind-zone
+  - name: keys
+    secret:
+      secretName: bind-tsig-key
+      items:
+      - key: external-dns.key
+        path: external-dns.key

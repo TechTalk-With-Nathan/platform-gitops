@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bind-zone
+  namespace: external-dns
+data:
+  k8s.zone: |
+    $TTL 60
+    example.com         IN SOA  example.com. root.example.com. (
+                                    16
+                                    60
+                                    60
+                                    60
+                                    60
+                                    )
+                            NS      ns.example.com.
+    ns                      A       127.0.0.1

@@ -1,0 +1,13 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: bind-tsig-key
+  namespace: external-dns
+spec:
+  encryptedData:
+    external-dns.key: AgA0gPO8B6lf6PNIQ/yAX9nR9VAIAQ8RbIF7odoO95+uHA2JHWui784FMicDmqZlJJG1GBx8EbJt11X58GrUciPluE27XiAwKkem/eYB6UQAWwRGe7yy+MMMLhoC5nd3C/bJjQfbfEkiu6txAr+VFEM93B5QjIVruLUtoceFpbKk+PYZf4rirdRj8f2ndOMRhpEp8kyuMv/V9i9uLZONXNnSKfMbHTS81smOIRKq/kQuXB8ai41tBZV7WNiaa6FeVp550Gj+1cCMCqPyWL3itRr1MD4ByUHxhC4UPyRrcN3sPkFaYs2gM9YkxZsgwZ1eU5h6oW99ceUgruvL32sNXuXarsh+CpFhd2Zz7ZecBV05f2jKUV7A8Gno7u/3YZotzX2q6Ucu+d87TS4Wnq9d6XE7Qqncg2N+a/XZ11hV1vfYvfDVdJ8ptaAS5WY0xsoCXONpcZjJIL+lMWFUcMLPiYtIAAfb7ryzECLuHqzYPIxmIlHIwxxLMb5ICfbjeiYAxRusLrUOQMi/slNPUKCEL1LLyzBQ6Ka974ocAVPa9RYzhd7bJn5gOlc7o8JE3km9bWTx2mNdydO6E6PzBSkFmXdsvdywn+Cq8QzcTkltFUHyRUVKJ55zD9/w3QMBs69o2Watx4sqbdR46cHi8hlca1SDQxtpab8XNVSwSJts34sghBrRmSVORR6Bty/xf9p5ELVjnSvTMTmxe9KgIoKAjKOaW5ijJZ0x4iVKJfQqHB56YYQgttdw3JbI6wpHcIDn32RqlrElYiTKtUsMWj8X0VqbEjDHKROoQmXqoz2I49vT3v7ceCE4nxqeUpACKaALBQUzvux7aQXj
+  template:
+    metadata:
+      name: bind-tsig-key
+      namespace: external-dns

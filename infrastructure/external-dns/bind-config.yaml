@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bind-config
+  namespace: external-dns
+data:
+  named.conf.options: |
+    options {
+        directory "/var/cache/bind";
+        recursion no;
+        allow-query { any; };
+        listen-on { any; };
+        listen-on-v6 { any; };
+    };
+
+  named.conf.local: |
+    include "/etc/bind/keys/external-dns.key";
+
+    zone "example.com" {
+        type master;
+        file "/zones/k8s.zone";
+        allow-transfer { key "externaldns-key"; };
+        update-policy { grant externaldns-key zonesub ANY; };
+    };
