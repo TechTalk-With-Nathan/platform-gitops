@@ -10,7 +10,11 @@ spec:
   - name: dns-udp
     port: 53
     protocol: UDP
+    targetPort: 53
+    nodePort: 30053
   - name: dns-tcp
     port: 53
     protocol: TCP
-  type: ClusterIP
+    targetPort: 53
+    nodePort: 30053
+  type: NodePort
